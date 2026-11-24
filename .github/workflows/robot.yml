@@ -1,0 +1,63 @@
+# Runs Part 3 (Robot Framework) of the UI lab on a GitHub Actions runner.
+# Start it by hand: Actions, robot, Run workflow.
+name: robot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: robot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Steps 0.1 and 0.3, Chrome and ChromeDriver
+        run: |
+          google-chrome --version
+          DRIVER="$(command -v chromedriver || echo "$CHROMEWEBDRIVER/chromedriver")"
+          "$DRIVER" --version
+          echo "CHROMEDRIVER=$DRIVER" >> "$GITHUB_ENV"
+          echo "python: $(python --version)"
+
+      - name: Step 3.1, install Robot Framework
+        run: |
+          pip install -r requirements.txt
+          robot --version
+
+      - name: Step 3.2, first test
+        run: robot -d /tmp/first -v BROWSER:headlesschrome first.robot
+
+      - name: Step 3.2, failure on purpose
+        run: |
+          sed 's/Title Should Be    Web form/Title Should Be    Web Form/' first.robot > failing.robot
+          robot -d /tmp/failing -v BROWSER:headlesschrome failing.robot || true
+          rm failing.robot
+
+      - name: Step 3.3, every kind of field
+        run: robot -d /tmp/webform -v BROWSER:headlesschrome web_form.robot
+
+      - name: Step 3.8, two full runs of QP-01
+        run: |
+          rm -rf results
+          robot -d results/run1 -v BROWSER:headlesschrome pizza_scenario.robot
+          robot -d results/run2 -v BROWSER:headlesschrome pizza_scenario.robot
+
+      - name: Commit the evidence
+        working-directory: .
+        run: |
+          git config user.name "Sirawit04"
+          git config user.email "Sirawit04@users.noreply.github.com"
+          git add robot/results
+          git commit -m "Step 3.8: evidence of two full runs (robot/results)" || echo "nothing to commit"
+          git pull --rebase
+          git push
