@@ -8,3 +8,8 @@ cypress/cypress/downloads/
 .DS_Store
 .idea/
 .vscode/
+# output files that Robot Framework writes again at every run
+robot/output.xml
+robot/log.html
+robot/report.html
+robot/*.png
