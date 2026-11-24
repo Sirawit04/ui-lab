@@ -1,0 +1,9 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "Part 4 of the UI lab: Cypress tests for the web form and QuickPizza.",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^16.2.1"
+  }
+}
