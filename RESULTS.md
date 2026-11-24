@@ -5,8 +5,8 @@ Tool parts that I chose: Part 3 (Robot Framework) and Part 4 (Cypress)
 
 
 ## Part 0
-- Step 0.1, Chrome version: Google Chrome 157.0.8103.78 (Official Build) (64-bit), Windows 11
-- Step 0.3, ChromeDriver version: 157.0.8103.78
+- Step 0.1, Chrome version: Google Chrome 158.0.8127.36 
+- Step 0.3, ChromeDriver version: 158.0.8127.36
 - Step 0.4, locator of Pizza, Please!: name:pizza-please
 - Step 0.4, locator of Excluded tools: css:select
 - Step 0.4, locator of Must be vegetarian: id:default-checkbox
