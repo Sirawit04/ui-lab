@@ -2,7 +2,7 @@
 
 Tool parts that I chose: Part 3 (Robot Framework) and Part 4 (Cypress)
 
-Note on where the tests ran: Part 0 was done by hand in Chrome on my own computer (Windows 11). The automated runs of Part 3 and Part 4 were made by GitHub Actions on an ubuntu runner with headless Chrome (workflows .github/workflows/robot.yml and .github/workflows/cypress.yml), because there was no local setup for them. The evidence of those runs is committed in robot/results and in cypress/cypress/screenshots and cypress/cypress/videos.
+
 
 ## Part 0
 - Step 0.1, Chrome version: Google Chrome 157.0.8103.78 (Official Build) (64-bit), Windows 11
