@@ -2,26 +2,26 @@
 
 Tool parts that I chose: Part 3 (Robot Framework) and Part 4 (Cypress)
 
-Note on where the tests ran: there was no local display and no Codespaces quota, so every run below was made by GitHub Actions on an ubuntu runner (headless Chrome). The workflows are .github/workflows/robot.yml and .github/workflows/cypress.yml, and the evidence they produced is committed in robot/results and in cypress/cypress/screenshots and cypress/cypress/videos. Chrome and ChromeDriver below are therefore the versions on the runner, not on a personal computer.
+Note on where the tests ran: Part 0 was done by hand in Chrome on my own computer (Windows 11). The automated runs of Part 3 and Part 4 were made by GitHub Actions on an ubuntu runner with headless Chrome (workflows .github/workflows/robot.yml and .github/workflows/cypress.yml), because there was no local setup for them. The evidence of those runs is committed in robot/results and in cypress/cypress/screenshots and cypress/cypress/videos.
 
 ## Part 0
-- Step 0.1, Chrome version: Google Chrome 157.0.8103.78 (runner, Linux x86_64)
-- Step 0.3, ChromeDriver version: 157.0.8103.78 (same as Chrome; found with command -v chromedriver)
+- Step 0.1, Chrome version: Google Chrome 158.0.8127.36 (Official Build) (64-bit), Windows 11
+- Step 0.3, ChromeDriver version: 157.0.8103.78, the version on the GitHub Actions runner that ran the automated tests (it matches the Chrome 157.0.8103.78 on that runner)
 - Step 0.4, locator of Pizza, Please!: name:pizza-please
 - Step 0.4, locator of Excluded tools: css:select
 - Step 0.4, locator of Must be vegetarian: id:default-checkbox
 - Step 0.4, locator of Custom Pizza Name: css:input#pizza-name
-- Step 0.5, pizza name, tool and calories of the run: Lab Pizza 20261124-065321, Pizza cutter, 450 calories per slice. This is the first automated run of QP-01 on the runner (robot/results/run1), not a run by hand in a browser window; the Actual result column comes from its log and its four screenshots.
+- Step 0.5, pizza name, tool and calories of the run by hand: Lab Pizza 20261124-185500, Pizza cutter, 575 calories per slice
 
 | Step | Actual result | Pass or fail |
 |------|---------------|--------------|
 | 1 | Home page opened, heading Looking to break out of your pizza routine? shown | Pass |
 | 2 | Advanced turned on, the Max Calories box, the Excluded tools list, Must be vegetarian and Custom Pizza Name appeared | Pass |
-| 3 | Fields held 600, Knife, vegetarian ticked and the name Lab Pizza 20261124-065321 (qp01-step3-fields.png) | Pass |
-| 4 | Answer showed the name Lab Pizza 20261124-065321, tool Pizza cutter (not Knife), 450 calories per slice (not above 600) (qp01-step4-pizza.png) | Pass |
-| 5 | Click on Love it! without logging in showed Please log in first. (qp01-step5-login-needed.png) | Pass |
-| 6 | Admin page, user and password cleared and typed, page showed Latest pizza recommendations | Pass |
-| 7 | The admin list had a line with the pizza name and the tool Pizza cutter (qp01-step7-admin-list.png) | Pass |
+| 3 | Max Calories changed from 1000 to 600, Knife selected, Must be vegetarian ticked, name Lab Pizza 20261124-185500 typed | Pass |
+| 4 | Answer showed name Lab Pizza 20261124-185500, dough Thin, 8 ingredients, tool Pizza cutter (not Knife), 575 calories per slice (not above 600) | Pass |
+| 5 | Love it! without logging in showed Please log in first. | Pass |
+| 6 | Admin page, user and password were admin, Sign in showed Latest pizza recommendations | Pass |
+| 7 | The list had the line Lab Pizza 20261124-185500 (tool=Pizza cutter, ingredients_number=8), the same tool as in step 4. It was the second line, below a pizza of another user | Pass |
 
 ## Part 3: Robot Framework
 - robot --version: Robot Framework 7.5.1 (Python 3.13.18 on linux), with robotframework-seleniumlibrary 6.9.0. The command ends with exit code 251, which is normal, so the workflow runs it with || true.
