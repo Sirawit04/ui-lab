@@ -1,0 +1,61 @@
+# Runs Part 4 (Cypress) of the UI lab on a GitHub Actions runner.
+# Start it by hand: Actions, cypress, Run workflow.
+name: cypress
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cypress
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Steps 0.1 and 4.1, Chrome, Node.js and npm versions
+        run: |
+          google-chrome --version
+          node --version
+          npm --version
+
+      - name: Step 4.1, install Cypress
+        run: |
+          npm install
+          npx cypress install
+          npx cypress verify
+          npx cypress version
+          npx cypress info
+
+      - name: Step 4.3, web form spec
+        run: npx cypress run --browser chrome --spec cypress/e2e/web-form.cy.js
+
+      - name: Step 4.3, failure on purpose
+        run: |
+          sed "s/'eq', 'Web form')/'eq', 'Web Form')/" cypress/e2e/web-form.cy.js > cypress/e2e/failing.cy.js
+          npx cypress run --browser chrome --spec cypress/e2e/failing.cy.js || true
+          rm cypress/e2e/failing.cy.js
+
+      - name: Step 4.8, two full runs
+        run: |
+          rm -rf cypress/screenshots cypress/videos
+          npx cypress run --browser chrome
+          npx cypress run --browser chrome
+
+      - name: Commit the evidence
+        working-directory: .
+        run: |
+          git config user.name "Sirawit04"
+          git config user.email "Sirawit04@users.noreply.github.com"
+          git add cypress/package-lock.json cypress/cypress/videos cypress/cypress/screenshots
+          git commit -m "Step 4.8: evidence of two full runs (cypress videos and screenshots)" || echo "nothing to commit"
+          git pull --rebase
+          git push
