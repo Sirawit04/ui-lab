@@ -5,8 +5,8 @@ Tool parts that I chose: Part 3 (Robot Framework) and Part 4 (Cypress)
 Note on where the tests ran: Part 0 was done by hand in Chrome on my own computer (Windows 11). The automated runs of Part 3 and Part 4 were made by GitHub Actions on an ubuntu runner with headless Chrome (workflows .github/workflows/robot.yml and .github/workflows/cypress.yml), because there was no local setup for them. The evidence of those runs is committed in robot/results and in cypress/cypress/screenshots and cypress/cypress/videos.
 
 ## Part 0
-- Step 0.1, Chrome version: Google Chrome 158.0.8127.36 (Official Build) (64-bit), Windows 11
-- Step 0.3, ChromeDriver version: 157.0.8103.78, the version on the GitHub Actions runner that ran the automated tests (it matches the Chrome 157.0.8103.78 on that runner)
+- Step 0.1, Chrome version: Google Chrome 157.0.8103.78 (Official Build) (64-bit), Windows 11
+- Step 0.3, ChromeDriver version: 157.0.8103.78
 - Step 0.4, locator of Pizza, Please!: name:pizza-please
 - Step 0.4, locator of Excluded tools: css:select
 - Step 0.4, locator of Must be vegetarian: id:default-checkbox
