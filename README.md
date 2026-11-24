@@ -21,7 +21,3 @@ Run:
 ## GitHub Actions
 
 The runs of this repository were made on a GitHub Actions runner with headless Chrome, started by hand under Actions: workflow robot (.github/workflows/robot.yml) and workflow cypress (.github/workflows/cypress.yml). Each workflow commits its own evidence back to main.
-
-## Note on tools
-
-The code in this repository was written with the help of an AI assistant (Claude) following the lab sheet, and was run on the runner described above.
