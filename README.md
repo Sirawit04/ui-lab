@@ -18,6 +18,3 @@ Run:
 
     cd cypress && npm install && npx cypress run --browser chrome
 
-## GitHub Actions
-
-The runs of this repository were made on a GitHub Actions runner with headless Chrome, started by hand under Actions: workflow robot (.github/workflows/robot.yml) and workflow cypress (.github/workflows/cypress.yml). Each workflow commits its own evidence back to main.
